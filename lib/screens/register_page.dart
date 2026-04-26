@@ -37,16 +37,19 @@ class _RegisterPageState extends State<RegisterPage> {
     });
 
     try {
+      final email = _emailController.text.trim();
+
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: _emailController.text.trim(),
+        email: email,
         password: _passwordController.text,
       );
+      await FirebaseAuth.instance.signOut();
 
       if (!mounted) {
         return;
       }
 
-      Navigator.of(context).popUntil((route) => route.isFirst);
+      Navigator.of(context).pop(email);
     } on FirebaseAuthException catch (error) {
       if (!mounted) {
         return;

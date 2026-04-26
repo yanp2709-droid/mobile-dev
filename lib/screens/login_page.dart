@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../firebase_auth_error_message.dart';
+import 'register_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -21,6 +22,33 @@ class _LoginPageState extends State<LoginPage> {
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
+  }
+
+  Future<void> _openRegisterPage() async {
+    final result = await Navigator.of(
+      context,
+    ).push(MaterialPageRoute(builder: (context) => const RegisterPage()));
+    final registeredEmail = result is String ? result : null;
+
+    if (!mounted || registeredEmail == null || registeredEmail.isEmpty) {
+      return;
+    }
+
+    _emailController.text = registeredEmail;
+    _emailController.selection = TextSelection.collapsed(
+      offset: registeredEmail.length,
+    );
+    _passwordController.clear();
+
+    ScaffoldMessenger.of(context)
+      ..clearSnackBars()
+      ..showSnackBar(
+        const SnackBar(
+          content: Text(
+            'Account created. Please log in with your new account to continue.',
+          ),
+        ),
+      );
   }
 
   Future<void> _signIn() async {
@@ -142,11 +170,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     const SizedBox(height: 12),
                     TextButton(
-                      onPressed: _isSubmitting
-                          ? null
-                          : () {
-                              Navigator.of(context).pushNamed('/register');
-                            },
+                      onPressed: _isSubmitting ? null : _openRegisterPage,
                       child: const Text("Don't have an account? Register"),
                     ),
                   ],
