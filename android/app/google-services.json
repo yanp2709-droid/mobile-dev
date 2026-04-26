@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "431864300111",
+    "project_id": "prince-de88e",
+    "storage_bucket": "prince-de88e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:431864300111:android:b79080021f33b72f79e03a",
+        "android_client_info": {
+          "package_name": "com.example.flutter_application_yan"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDewKVwjXzSm-r-JJptCem7ip19G9sqGPk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
